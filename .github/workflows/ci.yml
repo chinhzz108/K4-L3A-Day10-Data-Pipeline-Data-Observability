@@ -1,0 +1,39 @@
+name: CI Pipeline & Data Observability Verification
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install pytest
+
+      - name: Run Test Suite
+        env:
+          LLM_PROVIDER: mock
+          PYTHONIOENCODING: utf-8
+        run: |
+          pytest -v tests/test_pipeline.py
+
+      - name: Verify Baseline Pipeline Run
+        env:
+          LLM_PROVIDER: mock
+          PYTHONIOENCODING: utf-8
+        run: |
+          python script/run_phase1.py

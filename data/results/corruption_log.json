@@ -1,0 +1,64 @@
+[
+  {
+    "corruption_type": "drop_latest_records",
+    "count": 4,
+    "target_ids": [
+      "10.1145/3637528.3671812",
+      "10.1145/3637528.3671808",
+      "10.1145/3637528.3671804",
+      "10.1145/3637528.3671807"
+    ],
+    "details": "Dropped newest 4 records (20%) to simulate ingestion pipeline gap."
+  },
+  {
+    "corruption_type": "blank_summary",
+    "count": 2,
+    "target_ids": [
+      "10.1145/3637528.3671802",
+      "10.1145/3637528.3671824"
+    ],
+    "details": "Erased summary text on 2 records (GX summary length violation)."
+  },
+  {
+    "corruption_type": "inject_noise",
+    "count": 2,
+    "target_ids": [
+      "10.1145/3637528.3671823",
+      "10.1145/3637528.3671822"
+    ],
+    "details": "Appended adversarial noise tokens to summary on 2 records."
+  },
+  {
+    "corruption_type": "truncate_title",
+    "count": 2,
+    "target_ids": [
+      "10.1145/3637528.3671821",
+      "10.1145/3637528.3671810"
+    ],
+    "details": "Truncated title to < 8 chars on 2 records."
+  },
+  {
+    "corruption_type": "stale_date",
+    "count": 8,
+    "target_ids": [
+      "10.1145/3637528.3671814",
+      "10.1145/3637528.3671813",
+      "10.1145/3637528.3671801",
+      "10.1145/3637528.3671811",
+      "10.1145/3637528.3671806",
+      "10.1145/3637528.3671809",
+      "10.1145/3637528.3671803",
+      "10.1145/3637528.3671805"
+    ],
+    "details": "Shifted publication dates back by 365 days on 8 records to trigger Freshness SLA breach."
+  },
+  {
+    "corruption_type": "duplicate_rows",
+    "count": 2,
+    "target_ids": [
+      "10.1145/3637528.3671802",
+      "10.1145/3637528.3671824"
+    ],
+    "details": "Duplicated 2 rows (GX paper_id uniqueness violation)."
+  }
+]
